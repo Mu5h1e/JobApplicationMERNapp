@@ -22,6 +22,12 @@ if (process.env.NODE_ENV === 'development') {
     // cors helps deal with react for localhost without any issues
 }
 
+// Loading all routes
+const authRouter = require('./routes/auth.route')
+
+//Use Routes
+app.use('/api/', authRouter)
+
 app.use((req,res,next) => {
     res.status(404).json({
         success: false,
