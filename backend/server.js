@@ -11,7 +11,7 @@ require('dotenv').config({
 path:'./config/config.env'
 })
 
-// unidentidied / null error for req.body
+// body-parser has been depricated
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json({extended: true}))
 

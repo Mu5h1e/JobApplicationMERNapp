@@ -60,4 +60,4 @@ userSchema.methods = {
     }
 }
 
-module.exports = mongoose.model('User, userSchema')
+module.exports = Users = mongoose.model('User, userSchema')
