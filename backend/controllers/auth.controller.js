@@ -1,5 +1,5 @@
 exports.registerController = (req,res) => {
     const {name,email,password} = req.body
-    console.log('name, email, password')
+    console.log(name, email, password)
     res.send('recieved: Success')
 }
