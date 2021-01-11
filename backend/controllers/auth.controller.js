@@ -1,6 +1,5 @@
 exports.registerController = (req,res) => {
-    res.json({
-        success: true,
-        message: 'Register route'
-    })
+    const {name,email,password} = req.body
+    console.log('name, email, password')
+    res.send('recieved: Success')
 }

@@ -11,6 +11,10 @@ require('dotenv').config({
 path:'./config/config.env'
 })
 
+// unidentidied / null error for req.body
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json({extended: true}))
+
 // Config for only development
 if (process.env.NODE_ENV === 'development') {
     app.use(cors({
