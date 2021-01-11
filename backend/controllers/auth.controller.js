@@ -1,6 +1,6 @@
 const User = require('../models/auth.model')
 const expressJwt = require('express-jwt')
-const _ = require('loadash')
+//const _ = require('loadash')
 const {OAuth2Client} = require('google-auth-library')
 const fetch = require('node-fetch')
 const {validationResult} = require('express-validator')
@@ -44,14 +44,24 @@ exports.registerController = (req,res) => {
 
         const emailData = {
             from: process.env.EMAIL_FROM,
-            to: to,
+            to: email,
             subject: 'Account activation link',
             html: `
                 <h1>Please Click link to activate</h1>
-                <p>${process.env.CLIENT_URL}/users/activate/${token}</p>
+                <a href='${process.env.CLIENT_URL}/users/activate/${token}'><p>${process.env.CLIENT_URL}/users/activate/${token}</p></a>
                 <hr/>
                 <p></p>
             `
         }
+
+        sgMail.send(emailData).then(sent => {
+            return res.json({
+                message: `email has been sent to ${email}`
+            })
+        }).catch(err => {
+            return res.status(400).json({
+                error: errorHandler(err)
+            })
+        })
     }
 }

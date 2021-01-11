@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     salt: String,
     role:{
         type: String,
-        default: Employee
+        default: 'Employee'
     },
     resetPasswordLink: {
         data: String,
@@ -60,4 +60,4 @@ userSchema.methods = {
     }
 }
 
-module.exports = Users = mongoose.model('User, userSchema')
+module.exports = Users = mongoose.model('User', userSchema)
