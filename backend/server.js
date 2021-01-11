@@ -2,14 +2,16 @@ const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-
-const app = express()
-
+const connectDB = require('./config/db')
 
 // Config .env to ./config/config.env
 require('dotenv').config({
 path:'./config/config.env'
 })
+
+const app = express()
+
+connectDB()
 
 // body-parser has been depricated
 app.use(bodyParser.urlencoded({extended: true}))
