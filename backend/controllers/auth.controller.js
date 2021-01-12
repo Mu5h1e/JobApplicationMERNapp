@@ -93,7 +93,6 @@ exports.activationController = (req, res) => {
               } else {
                 return res.json({
                   success: true,
-                  message: user,
                   message: 'Signup success'
                 });
               }
@@ -102,7 +101,7 @@ exports.activationController = (req, res) => {
         });
       } else {
         return res.json({
-          message: 'error happening please try again'
+          message: 'error please try again later'
         });
       }
     };
