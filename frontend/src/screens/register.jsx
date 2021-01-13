@@ -11,26 +11,29 @@ const Register = () => {
         email: '',
         password1: '',
         password2: '',
+        role: ''
     })
-    const {name, email, password1, password2} = formData
+    const {name, email, password1, password2, role} = formData
 
     const handleChange = text => e => {
         setFormData({...formData, [text]: e.target.value})
     }
 
+
     const handleSubmit = e => {
         e.preventDefault()
-        if(name && email && password1) {
+        if(name && email && password1 && role) {
             if(password1 === password2) {
                 axios.post(`http://localhost:5000/api/register`, {
-                    name,email,password:password1
+                    name,email,password:password1,role
                 }).then(res => {
                     setFormData({
                         ...formData,
                         name:'',
                         email:'',
                         password1:'',
-                        password2:''
+                        password2:'',
+                        role: ''
                     })
                     toast.success(res.data.message)
                 }).catch(err=>{
@@ -88,6 +91,11 @@ const Register = () => {
                     onChange={handleChange('password2')}
                     value={password2}
                   />
+                  <select className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5" value={role} onChange={handleChange('role')}>
+                    <option id="0" value='employee'>Employee</option>
+                    <option id="1" value='employer'>Employer</option>
+                  </select>
+                
                   <button
                     type='submit'
                     className='mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none'

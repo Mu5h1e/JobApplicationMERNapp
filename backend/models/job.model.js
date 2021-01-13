@@ -22,27 +22,13 @@ const jobDescriptionSchema = new mongoose.Schema({
     },
     description:{
         type: String
-    }
+    },
+    skills: [{
+        type: String,
+        trim: true,
+        lowercase: true
+    }]
 }, {timestamps: true})
 
-// userSchema.methods = {
-//     makeSalt: function() {
-//         return Math.round(new Date().valueOf() * Math.random())+'' //conv to string
-//     },
-//     encryptPassword: function(password) {
-//         if(!password) return ''
-//         try {
-//             return crypto
-//             .createHmac('sha1', this.salt)
-//             .update(password)
-//             .digest("hex")
-//         } catch(err){
-//             return ''
-//         }
-//     },
-//     authenticate: function(plainPassword) {
-//         return this.encryptPassword(plainPassword) === this.hashedPassword
-//     }
-// }
 
-module.exports = Jobs = mongoose.model('User, jobDescriptionSchema')
+module.exports = Jobs = mongoose.model('User', jobDescriptionSchema)
