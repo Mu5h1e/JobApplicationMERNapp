@@ -11,7 +11,7 @@ exports.authorisationLoginController =  expressJwt({
   
 
 exports.profileDisplayController = (req, res) => {
-    const userId = req.params.id;
+    const userId = req.body;
     User.findById(userId).exec((err, user) => {
         if (err || !user) {
             return res.status(400).json({
