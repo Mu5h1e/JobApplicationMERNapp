@@ -20,6 +20,6 @@ router.post('/activation', activationController)
 router.post('/login', validLogin, loginController)
 router.post('/register', validSign, registerController)
 router.put('/forgotpassword', forgotPasswordValidator, forgotPasswordController);
-router.post('/resetpassword', resetPasswordValidator, resetPasswordController);
+//router.post('/resetpassword', resetPasswordValidator, resetPasswordController);
 
 module.exports = router
