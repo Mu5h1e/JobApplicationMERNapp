@@ -33,6 +33,8 @@ const Login = ({ history }) => {
               password1: '',
               textChange: 'Submitted'
             });
+
+            (isAuth() && isAuth().role == 'employee' ? history.push('/employee-view') : history.push('/employer-view'))
           });
         })
         .catch(err => {
