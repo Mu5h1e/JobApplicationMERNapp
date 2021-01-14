@@ -8,12 +8,12 @@ import Login from './screens/login'
 import 'react-toastify/dist/ReactToastify.css'
 ReactDOM.render(
   <BrowserRouter>
-    <switch>
+    <Switch>
       <Route path='/' exact render={props => <App {...props}/>}/>
       <Route path='/register/' exact render={props => <Register {...props}/>}/>
       <Route path='/login/' exact render={props => <Login {...props}/>}/>
       <Route path='/users/activate/:token' exact render={props => <Activate {...props}/>}/>
-    </switch>
+    </Switch>
   </BrowserRouter>,
   document.getElementById('root')
 );

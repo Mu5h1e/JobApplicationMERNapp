@@ -46,7 +46,7 @@ export const signout = next => {
 }
 
 export const isAuth = () => {
-    if(window != 'undefined'){
+    if(window !=='undefined'){
         const cookieChecked = getCookie('token')
         if(cookieChecked){
             if(localStorage.getItem('user')){
