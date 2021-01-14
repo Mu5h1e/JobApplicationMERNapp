@@ -4,7 +4,7 @@ const expressJwt = require('express-jwt')
 const jwt = require('jsonwebtoken')
 const errorHandler = require('../helpers/dbErrorHandling')
 
-exports.authorisationLoginController =  expressJwt({
+exports.authorisationLoginController = ()  => expressJwt({
     secret: process.env.JWT_SECRET,
       algorithms: ['HS256']
   });

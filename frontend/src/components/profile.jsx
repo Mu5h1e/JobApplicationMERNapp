@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 // import authSvg from '../assests/update.svg';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
+import jwt from 'jsonwebtoken'
 import { updateUser, isAuth, getCookie, signout } from '../helpers/auth.helper';
+import { JsonWebTokenError } from 'jsonwebtoken';
 
 
 
@@ -21,19 +23,16 @@ const Profile = ( {history}) => {
 
       const loadProfile = () => {
         const token = getCookie('token');
-        axios({
-            method: 'post',
-            url: 'https://localhost:5000/api/user/profile',
-            headers: {
-                Authorization: `Bearer ${token}`
-            }, 
-            data: {
-                id: isAuth()._id
-            }
-          })
-          .then(res => {
-            const { role, name, email } = res.data;
-            setFormData({ ...formData, role, name, email });
+        const url = "http://localhost:5000/api/user"
+        const data = {_id: `${jwt.decode(token)._id}`}
+        const headers = {
+        "Content-Type": "application/json"
+    }
+    axios.post(url, data, headers)
+          .then((res) => {
+            console.log("Hiyyyyaaaaa")
+const { role, name, email } = res.data;
+                        setFormData({ ...formData, role, name, email });
           })
         }
     return(
@@ -43,7 +42,7 @@ const Profile = ( {history}) => {
           <div className='lg:w-1/2 xl:w-5/12 p-6 sm:p-12'>
             <div className='mt-12 flex flex-col items-center'>
               <h1 className='text-2xl xl:text-3xl font-extrabold'>
-                Profile Update
+                Profile
               </h1>
   
               <form
@@ -54,20 +53,20 @@ const Profile = ( {history}) => {
                     disabled
                     className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white'
                     type='text'
-                    placeholder='Role'
+                    placeholder={formData.name}
                   />
                   <input
                     disabled
                     className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5'
                     type='email'
-                    placeholder='Email'
-                    disabled
+                    placeholder={formData.email}
+                    
                   />
                   <input
                     disabled
                     className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5'
                     type='text'
-                    placeholder='Name'
+                    placeholder={formData.role}
                   />
                 </div>
                 <div className='my-12 border-b text-center'>
@@ -83,7 +82,7 @@ const Profile = ( {history}) => {
                     target='_self'
                   >
                     <i className='fas fa-sign-in-alt fa 1x w-6  -ml-2 text-indigo-500' />
-                    <span className='ml-4'>Home</span>
+                    <span className='ml-4'>Dashboard</span>
                   </a>
                 </div>
               </form>

@@ -13,6 +13,6 @@ const {
 
 } = require('../helpers/user.helper')
 
-router.post('/user/profile/',profileDisplayController)
+router.post('/user/',profileDisplayController)
 
 module.exports = router

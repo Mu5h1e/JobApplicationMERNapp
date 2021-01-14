@@ -34,7 +34,7 @@ const Login = ({ history }) => {
               textChange: 'Submitted'
             });
 
-            (isAuth() && isAuth().role == 'employee' ? history.push('/employee-view') : history.push('/employer-view'))
+            (isAuth() && isAuth().role == 'employee' ? history.push('/users/profile') :  history.push('/users/profile'))
           });
         })
         .catch(err => {
