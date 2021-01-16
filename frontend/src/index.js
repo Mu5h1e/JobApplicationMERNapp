@@ -10,6 +10,7 @@ import ResetPassword from './screens/resetPassword.jsx';
 import Profile from './components/profile'
 import 'react-toastify/dist/ReactToastify.css'
 import AddJobListing from './components/addJobListing';
+import Dashboard from './components/dashboard';
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
@@ -21,6 +22,7 @@ ReactDOM.render(
       <Route path='/users/password/forget' exact render={props => <ForgotPassword {...props} />} />
       <Route path='/users/profile' exact render={props => <Profile {...props} />} />
       <Route path='/jobs/addlisting' exact render={props => <AddJobListing {...props} />} />
+      <Route path='/dashboard' exact render={props => <Dashboard {...props} />} />
       {/* <Route path='/users/password/reset/:token' exact render={props => <ResetPassword {...props} />} /> */}
     </Switch>
   </BrowserRouter>,
