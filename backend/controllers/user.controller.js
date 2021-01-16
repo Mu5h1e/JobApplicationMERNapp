@@ -41,6 +41,14 @@ exports.addJobListing = (req, res) => {
             error: firstError
         }) 
     }
+    var query = Job.findOne({'title': title});
+    query.exec((err,job) => {
+        if (job) {
+            return res.status(400).json({
+                error: "Email is taken"
+            })
+        }
+    })
 
     const job = new Job({
         title,
