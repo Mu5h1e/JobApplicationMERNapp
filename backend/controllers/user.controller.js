@@ -22,6 +22,11 @@ exports.profileDisplayController = (req, res) => {
 
 exports.currentJobListings = (req, res) => {
     Job.find({expired:false}).exec((err, records) => {
+        if (err) {
+            res.json({
+                error: "dumb error"
+            })
+        }
         res.json(records)
     })
 }

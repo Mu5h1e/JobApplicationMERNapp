@@ -31,7 +31,7 @@ const jobDescriptionSchema = new mongoose.Schema({
 
     expired: {
         type: Boolean,
-        default: true
+        default: false
     }
 }, {timestamps: true})
 
