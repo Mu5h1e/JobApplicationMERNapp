@@ -29,7 +29,7 @@ const Profile = ( {history}) => {
         "Content-Type": "application/json"
     }
     axios.post(url, data, headers)
-          .then((res) => {)
+          .then((res) => {
 const { role, name, email } = res.data;
                         setFormData({ ...formData, role, name, email });
           })
