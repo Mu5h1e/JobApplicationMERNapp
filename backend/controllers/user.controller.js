@@ -40,17 +40,6 @@ exports.addJobListing = (req, res) => {
         return res.status(422).json({
             error: firstError
         }) 
-    }else {
-        Job.findOne({
-            title,
-            email
-        }).exec((err, job) => {
-            if(job) {
-                return res.status(400).json({
-                    error: 'A job that you have posted with the same title exists'
-                })
-            }
-        })
     }
 
     const job = new Job({

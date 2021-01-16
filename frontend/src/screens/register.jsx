@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+//import authSvg from '../assets/auth.svg'
 import {ToastContainer, toast} from 'react-toastify'
 import { authenticate, isAuth } from '../helpers/auth.helper'
 import axios from 'axios'
@@ -90,7 +91,7 @@ const Register = () => {
                     value={password2}
                   />
                   <select className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5" value={role} onChange={handleChange('role')}>
-                    <option id="0" value='null' hidden='true'>Enter option</option>
+                    <option id="0" value='placeholder' hidden='true'>Enter option</option>
                     <option id="1" value='employee'>Employee</option>
                     <option id="2" value='employer'>Employer</option>
                   </select>
