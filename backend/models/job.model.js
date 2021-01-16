@@ -27,8 +27,16 @@ const jobDescriptionSchema = new mongoose.Schema({
         type: String,
         trim: true,
         lowercase: true
-    }]
+    }],
+
+    expired: {
+        type: Boolean,
+        default: true
+    }
 }, {timestamps: true})
 
 
-module.exports = Jobs = mongoose.model('User', jobDescriptionSchema)
+jobDescriptionSchema.methods = {
+}
+
+module.exports = Jobs = mongoose.model('Job', jobDescriptionSchema)
