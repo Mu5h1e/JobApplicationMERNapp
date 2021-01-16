@@ -1,19 +1,32 @@
 import React, { useState } from 'react'
 import {ToastContainer, toast} from 'react-toastify'
-import { authenticate, isAuth } from '../helpers/auth.helper'
 import axios from 'axios'
+import jwt from 'jsonwebtoken'
+import { updateUser, getCookie, signout } from '../helpers/auth.helper';
 import {Redirect} from 'react-router-dom'
 
-const Register = () => {
+const AddJobListing = () => {
     const [formData, setFormData] = useState({
-        name: '',
+        title: '',
         email: '',
-        password1: '',
-        password2: '',
-        role: ''
+        maxApplications: null,
+        maxOpenings: null,
+        description: '',
+        skills: []
     })
-    const {name, email, password1, password2, role} = formData
-
+    const {title, email, maxApplications, maxOpenings, description, skills} = formData
+    const token = getCookie('token');
+    const url = "http://localhost:5000/api/user"
+    const data = {_id: `${jwt.decode(token)._id}`}
+    const headers = {
+    "Content-Type": "application/json"
+    }
+    axios.post(url, data, headers)
+      .then((res) => {
+        const { role, name, email } = res.data;
+        formData.email = email
+      })
+    console.log(formData.email)
     const handleChange = text => e => {
         setFormData({...formData, [text]: e.target.value})
     }
@@ -21,26 +34,23 @@ const Register = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        if(name && email && password1 && role) {
-            if(password1 === password2) {
-                axios.post(`http://localhost:5000/api/register`, {
-                    name,email,password:password1,role
-                }).then(res => {
-                    setFormData({
-                        ...formData,
-                        name:'',
-                        email:'',
-                        password1:'',
-                        password2:'',
-                        role: ''
-                    })
-                    toast.success(res.data.message)
-                }).catch(err=>{
-                    toast.error(err.response.data.error)
-                })
-            } else {
-                toast.error('Passwords do not match')
-            }
+        if(title && maxApplications && maxOpenings && description && skills) {
+          axios.post(`http://localhost:5000/api/addJobListings`, {
+              title,email,maxApplications, maxOpenings, description, skills
+          }).then(res => {
+              setFormData({
+                  ...formData,
+                  title: '',
+                  email: '',
+                  maxApplications: null,
+                  maxOpenings: null,
+                  description: '',
+                  skills: []
+              })
+              toast.success(res.data.message)
+          }).catch(err=>{
+              toast.error(err.response.data.error)
+          })
         } else {
             toast.error('Please fill all the fields')
         }
@@ -48,12 +58,13 @@ const Register = () => {
 
     return(
         <div className='min-h-screen bg-gray-100 text-gray-900 flex justify-center'>
+
         <ToastContainer />
         <div className='max-w-screen-xl m-0 sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1'>
           <div className='lg:w-1/2 xl:w-5/12 p-6 sm:p-12'>
             <div className='mt-12 flex flex-col items-center'>
               <h1 className='text-2xl xl:text-3xl font-extrabold'>
-                Sign Up for JobWala
+                add job :D
               </h1>
   
               <form
@@ -62,38 +73,40 @@ const Register = () => {
               >
                 <div className='mx-auto max-w-xs relative '>
                   <input
-                    className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white'
+                    className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5'
                     type='text'
-                    placeholder='Name'
-                    onChange={handleChange('name')}
-                    value={name}
+                    placeholder='title'
+                    onChange={handleChange('title')}
+                    value={title}
                   />
                   <input
                     className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5'
-                    type='email'
-                    placeholder='Email'
-                    onChange={handleChange('email')}
+                    type='text'
+                    placeholder='email'
                     value={email}
+                    disabled
                   />
                   <input
                     className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5'
-                    type='password'
-                    placeholder='Password'
-                    onChange={handleChange('password1')}
-                    value={password1}
+                    type='number'
+                    placeholder='max no of openings'
+                    onChange={handleChange('maxApplications')}
+                    value={maxApplications}
                   />
                   <input
                     className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5'
-                    type='password'
-                    placeholder='Confirm Password'
-                    onChange={handleChange('password2')}
-                    value={password2}
+                    type='number'
+                    placeholder='max no of openings'
+                    onChange={handleChange('maxOpenings')}
+                    value={maxOpenings}
                   />
-                  <select className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5" value={role} onChange={handleChange('role')}>
-                    <option id="0" value='null' hidden='true'>Enter option</option>
-                    <option id="1" value='employee'>Employee</option>
-                    <option id="2" value='employer'>Employer</option>
-                  </select>
+                  <input
+                    className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5'
+                    type='text'
+                    placeholder='description'
+                    onChange={handleChange('description')}
+                    value={description}
+                  />
                 
                   <button
                     type='submit'
@@ -115,7 +128,7 @@ const Register = () => {
                     target='_self'
                   >
                     <i className='fas fa-sign-in-alt fa 1x w-6  -ml-2 text-indigo-500' />
-                    <span className='ml-4'>Sign In</span>
+                    <span className='ml-4'>Add job</span>
                   </a>
                 </div>
               </form>
@@ -127,4 +140,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default AddJobListing

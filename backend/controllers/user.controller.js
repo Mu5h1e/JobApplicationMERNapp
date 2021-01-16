@@ -49,6 +49,8 @@ exports.addJobListing = (req, res) => {
                 return res.status(400).json({
                     error: 'A job that you have posted with the same title exists'
                 })
+            } else {
+                
             }
         })
     }
