@@ -3,21 +3,16 @@ import {ToastContainer, toast} from 'react-toastify'
 import { authenticate, isAuth } from '../helpers/auth.helper'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 
 const Dashboard = () => {
 
-    const [formData, setFormData] = useState({
-        title: '',
-        email: '',
-        maxApplications: null,
-        maxOpenings: null,
-        description: '',
-        skills: []
-    })
-    const {title, email, maxApplications, maxOpenings, description, skills} = formData
     let [jobListing, setJobListing] = React.useState([])
-   
+    const history = useHistory();
+    const handleSubmit = (id="abc") => {
+        history.push('/',{params:id})
+    }
     useEffect(() => {
         loadData();
       }, []);
@@ -78,17 +73,17 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-                <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+                <div className="inline-block min-w-full shadow rounded-lg overflow-hidden" onClick>
                     <table className="min-w-full leading-normal">
                         <thead>
                             <tr>
                                 <th
                                     className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    User
+                                    Employer
                                 </th>
                                 <th
                                     className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Role
+                                    title
                                 </th>
                                 <th
                                     className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -104,22 +99,22 @@ const Dashboard = () => {
                             return(<tbody>
                             <tr>
                                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <div className="flex items-center">
+                                    <div className="flex items-center" id={listing._id} onClick={(e) =>this.handleSubmit(listing._id)}>
                                         <div className="flex-shrink-0 w-10 h-10">
                                         </div>
                                         <div className="ml-3">
                                             <p className="text-gray-900 whitespace-no-wrap">
-                                                Vera Carpenter
+                                                {listing.email}
                                             </p>
                                         </div>
                                     </div>
                                 </td>
                                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <p className="text-gray-900 whitespace-no-wrap">Admin</p>
+                                    <p className="text-gray-900 whitespace-no-wrap">{listing.title}</p>
                                 </td>
                                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     <p className="text-gray-900 whitespace-no-wrap">
-                                        Jan 21, 2020
+                                        {listing.createdAt.substr(0,10)}
                                     </p>
                                 </td>
                                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -127,7 +122,7 @@ const Dashboard = () => {
                                         className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                         <span aria-hidden
                                             className="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                        <span className="relative">Activo</span>
+                                        <span className="relative">Active</span>
                                     </span>
                                 </td>
                             </tr>
