@@ -17,17 +17,20 @@ const Dashboard = () => {
     })
     const {title, email, maxApplications, maxOpenings, description, skills} = formData
     let [jobListing, setJobListing] = React.useState([])
-
+   
     useEffect(() => {
-        getJobListings()
-    }, [])
+        loadData();
+      }, []);
 
-    const getJobListings = () => { 
-        axios.post(`http://localhost:5000/api/dashboard`).then(res => {
-        let abc = JSON.parse
-        console.log("going in")
-        setJobListing(res.data)
-    } )}
+      const loadData = () => {
+        const url = "http://localhost:5000/api/dashboard"
+        axios.post(url)
+        .then(res => {
+            console.log(res.data)
+            setJobListing(res.data)
+            })
+    }  
+
     return(
         <div className="container mx-auto px-4 sm:px-8">
         <div className="py-8">
@@ -97,15 +100,12 @@ const Dashboard = () => {
                                 </th>
                             </tr>
                         </thead>
-                        {/* {jobListing.map((listing, index) => {
+                        {jobListing.map((listing, index) => {
                             return(<tbody>
                             <tr>
                                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     <div className="flex items-center">
                                         <div className="flex-shrink-0 w-10 h-10">
-                                            <img className="w-full h-full rounded-full"
-                                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                                                alt="" />
                                         </div>
                                         <div className="ml-3">
                                             <p className="text-gray-900 whitespace-no-wrap">
@@ -132,10 +132,8 @@ const Dashboard = () => {
                                 </td>
                             </tr>
                                 
-                        </tbody>)})} */}
-                        {jobListing.map((listing, index) => (
-                            console.log("hi")
-                        ))}
+                        </tbody>)})}
+
                     </table>
                 </div>
             </div>
