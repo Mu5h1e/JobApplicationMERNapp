@@ -11,6 +11,8 @@ import Profile from './components/profile'
 import 'react-toastify/dist/ReactToastify.css'
 import AddJobListing from './components/addJobListing';
 import Dashboard from './components/dashboard';
+import ExpandedDashboard from './components/expandedDashboard';
+
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
@@ -23,6 +25,8 @@ ReactDOM.render(
       <Route path='/users/profile' exact render={props => <Profile {...props} />} />
       <Route path='/jobs/addlisting' exact render={props => <AddJobListing {...props} />} />
       <Route path='/dashboard' exact render={props => <Dashboard {...props} />} />
+      <Route path='/expanded-dashboard' exact render={props => <ExpandedDashboard {...props} />} />
+
       {/* <Route path='/users/password/reset/:token' exact render={props => <ResetPassword {...props} />} /> */}
     </Switch>
   </BrowserRouter>,

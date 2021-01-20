@@ -8,10 +8,10 @@ import { useHistory } from "react-router-dom";
 
 const Dashboard = () => {
 
-    let [jobListing, setJobListing] = React.useState([])
+    let [activeJobListing, setactiveJobListing] = React.useState([])
     const history = useHistory();
-    const handleSubmit = (id="abc") => {
-        history.push('/',{params:id})
+    const handleSubmit = (id) => {
+        history.push('/expanded-dashboard',{params:id})
     }
     useEffect(() => {
         loadData();
@@ -22,7 +22,7 @@ const Dashboard = () => {
         axios.post(url)
         .then(res => {
             console.log(res.data)
-            setJobListing(res.data)
+            setactiveJobListing(res.data)
             })
     }  
 
@@ -99,7 +99,7 @@ const Dashboard = () => {
                                 </th>
                             </tr>
                         </thead>
-                        {jobListing.map((listing, index) => {
+                        {activeJobListing.map((listing, index) => {
                             return(<tbody>
                             <tr>
                                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
