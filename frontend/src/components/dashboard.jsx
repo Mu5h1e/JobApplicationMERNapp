@@ -73,7 +73,7 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-                <div className="inline-block min-w-full shadow rounded-lg overflow-hidden" onClick>
+                <div className="inline-block min-w-full shadow rounded-lg overflow-hidden"z>
                     <table className="min-w-full leading-normal">
                         <thead>
                             <tr>
@@ -93,13 +93,17 @@ const Dashboard = () => {
                                     className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     Status
                                 </th>
+                                <th
+                                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    view details
+                                </th>
                             </tr>
                         </thead>
                         {jobListing.map((listing, index) => {
                             return(<tbody>
                             <tr>
                                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <div className="flex items-center" id={listing._id} onClick={(e) =>this.handleSubmit(listing._id)}>
+                                    <div className="flex items-center">
                                         <div className="flex-shrink-0 w-10 h-10">
                                         </div>
                                         <div className="ml-3">
@@ -123,6 +127,16 @@ const Dashboard = () => {
                                         <span aria-hidden
                                             className="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
                                         <span className="relative">Active</span>
+                                    </span>
+                                </td>
+                                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <span
+                                        className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                        <span aria-hidden
+                                            className="absolute inset-0 bg-purple-200 opacity-50 rounded-full"></span>
+                                        <span className="relative">
+                                            <button onClick={() => handleSubmit(listing._id)}>expand</button>
+                                        </span>
                                     </span>
                                 </td>
                             </tr>
