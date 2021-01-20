@@ -3,23 +3,26 @@ import {ToastContainer, toast} from 'react-toastify'
 import { authenticate, isAuth } from '../helpers/auth.helper'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 
 const ExpandedDashboard = () => {
 
+    const location = useLocation()
+    console.log(location.state.params)
+
     let [activeJobListing, setactiveJobListing] = React.useState([])
-    const history = useHistory();
-    const handleSubmit = (id) => {
-        history.push('/listing',{params:id})
-    }
     useEffect(() => {
         loadData();
       }, []);
 
       const loadData = () => {
-        const url = "http://localhost:5000/api/dashboard"
-        axios.post(url)
+        const data = {id: `${location.state.params}`}
+        const headers = {
+        "Content-Type": "application/json"
+    }
+        const url = "http://localhost:5000/api/expanded-dashboard"
+        axios.post(url, data, headers)
         .then(res => {
             console.log(res.data)
             setactiveJobListing(res.data)

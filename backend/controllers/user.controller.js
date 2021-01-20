@@ -73,3 +73,14 @@ exports.addJobListing = (req, res) => {
         }
     })
 }
+exports.expandedDashboardController = (req, res) => {
+    const jobId = req.param('id');
+    Job.findById(jobId).exec((err, job) => {
+        if (err) {
+            return res.status(400).json({
+                error: 'dumb error'
+            });
+        }
+        res.json(job);
+    });
+}

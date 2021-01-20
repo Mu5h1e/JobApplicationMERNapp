@@ -4,14 +4,13 @@ const router = express.Router()
 const {
     profileDisplayController,
     currentJobListings,
-    addJobListing
+    addJobListing,
+    expandedDashboardController
 } = require('../controllers/user.controller')
-
-const {
-
-} = require('../helpers/user.helper')
 
 router.post('/user/',profileDisplayController)
 router.post('/dashboard/', currentJobListings)
 router.post('/addJobListings', addJobListing)
+router.post('/expanded-dashboard', expandedDashboardController)
+
 module.exports = router
