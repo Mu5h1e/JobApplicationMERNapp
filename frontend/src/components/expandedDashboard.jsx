@@ -58,8 +58,6 @@ const ExpandedDashboard = () => {
             })
     }  
 
-    console.log(currentJobListing)
-
     return(
 <div class="grid mx-20">
     <div class="bg-white rounded-lg shadow-sm hover:shadow-lg duration-500 px-2 sm:px-6 md:px-2 py-4 my-6">

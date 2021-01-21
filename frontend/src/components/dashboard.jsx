@@ -21,7 +21,6 @@ const Dashboard = () => {
         const url = "http://localhost:5000/api/dashboard"
         axios.post(url)
         .then(res => {
-            console.log(res.data)
             setactiveJobListing(res.data)
             })
     }  
