@@ -42,4 +42,4 @@ const jobDescriptionSchema = new mongoose.Schema({
 jobDescriptionSchema.methods = {
 }
 
-module.exports = Jobs = mongoose.model('Job', jobDescriptionSchema)
+module.exports = JobDescription = mongoose.model('JobDescription', jobDescriptionSchema)

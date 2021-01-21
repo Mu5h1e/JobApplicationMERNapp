@@ -28,7 +28,7 @@ const jobApplicationSchema = new mongoose.Schema({
 }, {timestamps: true})
 
 
-jobDescriptionSchema.methods = {
+jobApplicationSchema.methods = {
 }
 
-module.exports = JobApplications = mongoose.model('Job', jobApplicationSchema)
+module.exports = JobApplications = mongoose.model('JobApplication', jobApplicationSchema)

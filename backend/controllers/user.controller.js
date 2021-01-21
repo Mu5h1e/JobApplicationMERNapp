@@ -1,5 +1,6 @@
 const User = require('../models/auth.model')
 const Job = require('../models/job.model')
+const JobApplication = require('../models/application.model')
 const {validationResult} = require('express-validator')
 const expressJwt = require('express-jwt')
 const jwt = require('jsonwebtoken')
@@ -84,3 +85,32 @@ exports.expandedDashboardController = (req, res) => {
         res.json(job);
     });
 }
+exports.addJobApplication = (req,res) => {
+    const {applicantId, jobId, bio, skills}= req.body
+    const errors = validationResult(req)
+
+    if(!errors.isEmpty()) {
+        const firstError = errors.array().map(error => error.msg)[0]
+        return res.status(422).json({
+            error: firstError
+        })
+    } else {
+        const jobApplication = new JobApplication({
+            applicantId,
+            jobId,
+            bio,
+            skills
+          });
+  
+          jobApplication.save((err, jobApplication) => {
+            if (err) {
+              return res.status(401).json({
+                errors: "dumb error"
+              });
+            } else {
+              return res.json(jobApplication);
+            }
+          });
+        }
+    }
+
