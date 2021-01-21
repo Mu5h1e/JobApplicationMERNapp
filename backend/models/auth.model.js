@@ -41,6 +41,11 @@ const userSchema = new mongoose.Schema(
             lowercase: true
         }
     ],
+    rating: {
+      type: Number,
+      default: 0,
+      
+    },
     appliedList: [
         {
             type: String,
