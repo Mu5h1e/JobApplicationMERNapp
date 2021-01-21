@@ -27,7 +27,10 @@ const jobDescriptionSchema = new mongoose.Schema({
         trim: true,
         lowercase: true
     }],
-
+    duration: {
+        type: String,
+        default: '6 months'
+    },
     expired: {
         type: Boolean,
         default: false
