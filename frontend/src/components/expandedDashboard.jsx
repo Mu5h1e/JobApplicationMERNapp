@@ -21,6 +21,7 @@ const ExpandedDashboard = () => {
         skills: []
     })
 
+    let [currentEmail, setCurrentEmail] = React.useState('')
     let [currentRole, setCurrentRole] = React.useState(0)
     useEffect(() => {
         loadData()
@@ -39,8 +40,9 @@ const ExpandedDashboard = () => {
                 if(res.data.role == 'employee') {
                     let role=1
                     setCurrentRole(1)
-                    console.log(currentRole.isEmployee)
+                    console.log(currentRole)
                 }
+                setCurrentEmail(res.data.email)
             })
         }
 
@@ -95,6 +97,10 @@ const ExpandedDashboard = () => {
                         {currentJobListing.title}
                     </h3>
 
+                    <h4>
+                        {currentJobListing.duration}
+                    </h4>
+
                     <p class="mt-2 text-gray-600 text-sm md:text-md">
                         {currentJobListing.description}
                     </p>
@@ -113,13 +119,22 @@ const ExpandedDashboard = () => {
                     </div>
                     <div class="col-span-12 sm:col-start-3 sm:col-end-13 px-3 sm:px-0">
 
-                    <div class="mt-2">
+                    <div class="mt-2" hidden={currentRole==0 ? true : false}>
                     <button class="inline-block rounded-full text-white 
                             bg-blue-400 hover:bg-blue-500 duration-300 
                             text-xs font-bold 
                             mr-1 md:mr-2 mb-2 px-2 md:px-4 py-1 
                             opacity-90 hover:opacity-100">
                             apply
+                        </button>
+                    </div>
+                    <div class="mt-2" hidden={currentRole==1 && currentJobListing.email === currentEmail ? true : false}>
+                    <button class="inline-block rounded-full text-white 
+                            bg-blue-400 hover:bg-blue-500 duration-300 
+                            text-xs font-bold 
+                            mr-1 md:mr-2 mb-2 px-2 md:px-4 py-1 
+                            opacity-90 hover:opacity-100">
+                            check applications
                         </button>
                     </div>
                 </div>
