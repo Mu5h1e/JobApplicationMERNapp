@@ -1,7 +1,9 @@
 import React, { useState, useEffect} from 'react'
 import {ToastContainer, toast} from 'react-toastify'
-import { authenticate, isAuth } from '../helpers/auth.helper'
+import { authenticate, isAuth , getCookie} from '../helpers/auth.helper'
 import axios from 'axios'
+import jwt from 'jsonwebtoken'
+
 import {Redirect} from 'react-router-dom'
 import { useHistory, useLocation } from "react-router-dom";
 
@@ -18,9 +20,29 @@ const ExpandedDashboard = () => {
         description: '',
         skills: []
     })
+
+    let [currentRole, setCurrentRole] = React.useState(0)
     useEffect(() => {
-        loadData();
+        loadData()
+        loadProfile()
       }, []);
+
+      const loadProfile = () => {
+        const token = getCookie('token');
+        const url = "http://localhost:5000/api/user"
+        const data = {_id: `${jwt.decode(token)._id}`}
+        const headers = {
+        "Content-Type": "application/json"
+        }
+        axios.post(url, data, headers)
+            .then((res) => {
+                if(res.data.role == 'employee') {
+                    let role=1
+                    setCurrentRole(1)
+                    console.log(currentRole.isEmployee)
+                }
+            })
+        }
 
       const loadData = () => {
         const data = {id: `${location.state.params}`}
@@ -82,28 +104,30 @@ const ExpandedDashboard = () => {
                     <div class="col-span-12 lg:col-span-8">
                         {currentJobListing.skills.map((skill) =>
                         <p class="inline-block rounded-full text-white 
-                            bg-purple-400 hover:bg-purple-500 duration-300 
+                            bg-red-400 hover:bg-redle-500 duration-300 
                             text-xs font-bold 
                             mr-1 md:mr-2 mb-2 px-2 md:px-4 py-1 
                             opacity-90 hover:opacity-100">
                             {skill}
-                    </p>)}
+                        </p>)}
                     </div>
+                    <div class="col-span-12 sm:col-start-3 sm:col-end-13 px-3 sm:px-0">
 
-                    <div class="col-none hidden mr-2 lg:block lg:col-start-9 lg:col-end-12">
-                        <a href="#" class="flex items-center">
-
-                            <div class="text-gray-600 font-bold text-sm hover:underline">
-                                EgoistDeveloper
-                            </div>
-                        </a>
+                    <div class="mt-2">
+                    <button class="inline-block rounded-full text-white 
+                            bg-blue-400 hover:bg-blue-500 duration-300 
+                            text-xs font-bold 
+                            mr-1 md:mr-2 mb-2 px-2 md:px-4 py-1 
+                            opacity-90 hover:opacity-100">
+                            apply
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+</div>
     )
 }
 
