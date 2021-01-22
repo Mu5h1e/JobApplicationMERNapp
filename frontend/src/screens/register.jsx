@@ -10,9 +10,10 @@ const Register = () => {
         email: '',
         password1: '',
         password2: '',
-        role: ''
+        role: '',
+        sure: false
     })
-    const {name, email, password1, password2, role, skills} = formData
+    const {name, email, password1, password2, role, skills, sure} = formData
 
     const handleChange = text => e => {
         setFormData({...formData, [text]: e.target.value})
@@ -99,7 +100,12 @@ const Register = () => {
                     <option id="1" value='employee'>Employee</option>
                     <option id="2" value='employer'>Employer</option>
                   </select>
-                
+                  <input 
+                    type="checkbox" 
+                    class="form-checkbox"                      
+                    onChange={handleChange('sure')}
+                  />
+
                   <button
                     type='submit'
                     className='mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none'

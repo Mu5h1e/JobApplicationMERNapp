@@ -10,7 +10,7 @@ const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.MAIL_KEY)
 
 exports.registerController = (req,res) => {
-    const {name,email,password} = req.body
+    const {name,email,password,role} = req.body
     const errors = validationResult(req)
 
     if(!errors.isEmpty()) {
@@ -33,7 +33,8 @@ exports.registerController = (req,res) => {
             {
                 name,
                 email,
-                password
+                password,
+                role
             },
             process.env.JWT_ACCOUNT_ACTIVATION,
             {
@@ -74,13 +75,14 @@ exports.activationController = (req, res) => {
               errors: 'Expired link. Signup again'
             });
           } else {
-            const { name, email, password } = jwt.decode(token);
+            const { name, email, password, role } = jwt.decode(token);
     
             console.log(email);
             const user = new User({
               name,
               email,
-              password
+              password,
+              role
             });
     
             user.save((err, user) => {
