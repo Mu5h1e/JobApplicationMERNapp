@@ -117,7 +117,7 @@ const ExpandedDashboard = () => {
                     </div>
                     <div class="col-span-12 sm:col-start-3 sm:col-end-13 px-3 sm:px-0">
 
-                    <div class="mt-2" hidden={currentRole===1 ? true : false}>
+                    <div class="mt-2" hidden={currentRole===1 ? false : true}>
                     <button class="inline-block rounded-full text-white 
                             bg-blue-400 hover:bg-blue-500 duration-300 
                             text-xs font-bold 
@@ -126,7 +126,7 @@ const ExpandedDashboard = () => {
                             apply
                         </button>
                     </div>
-                    <div class="mt-2" hidden={currentRole==0 && currentJobListing.email === currentEmail ? true : false}>
+                    <div class="mt-2" hidden={currentRole==0 && currentJobListing.email === currentEmail ? false : true}>
                     <button class="inline-block rounded-full text-white 
                             bg-blue-400 hover:bg-blue-500 duration-300 
                             text-xs font-bold 
