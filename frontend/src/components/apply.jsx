@@ -55,7 +55,7 @@ const ApplyJob = () => {
           <div className='lg:w-1/2 xl:w-5/12 p-6 sm:p-12'>
             <div className='mt-12 flex flex-col items-center'>
               <h1 className='text-2xl xl:text-3xl font-extrabold'>
-                Sign Up for JobWala
+                Job Application
               </h1>
   
               <form
@@ -63,10 +63,10 @@ const ApplyJob = () => {
                 onSubmit={handleSubmit}
               >
                 <div className='mx-auto max-w-xs relative '>
-                  <input
+                  <textarea
                     className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5'
                     type='text'
-                    placeholder='bio'
+                    placeholder='Write why you should get this job'
                     onChange={handleChange('bio')}
                     value={bio}
                   />
