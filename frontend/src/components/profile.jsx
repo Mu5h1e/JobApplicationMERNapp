@@ -35,6 +35,7 @@ const Profile = () => {
             setFormData({ ...formData, role, name, email });
           })
         }
+    console.log(formData)
     return(
         <div className='min-h-screen bg-gray-100 text-gray-900 flex justify-center'>
         <ToastContainer />
@@ -47,6 +48,7 @@ const Profile = () => {
   
               <form
                 className='w-full flex-1 mt-8 text-indigo-500'
+                onSubmit={console.log(formData)}
               >
                 <div className='mx-auto max-w-xs relative '>
                   <input

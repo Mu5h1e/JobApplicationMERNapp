@@ -12,7 +12,7 @@ const Register = () => {
         password2: '',
         role: ''
     })
-    const {name, email, password1, password2, role} = formData
+    const {name, email, password1, password2, role, skills} = formData
 
     const handleChange = text => e => {
         setFormData({...formData, [text]: e.target.value})
@@ -22,10 +22,11 @@ const Register = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
+
         if(name && email && password1 && role) {
             if(password1 === password2) {
                 axios.post(`http://localhost:5000/api/register`, {
-                    name,email,password:password1,role
+                    name,email,password:password1,role,skills
                 }).then(res => {
                     setFormData({
                         ...formData,
@@ -33,7 +34,8 @@ const Register = () => {
                         email:'',
                         password1:'',
                         password2:'',
-                        role: ''
+                        role: '',
+                        skills: []
                     })
                     toast.success(res.data.message)
                 }).catch(err=>{
