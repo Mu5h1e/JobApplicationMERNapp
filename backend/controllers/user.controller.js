@@ -95,22 +95,35 @@ exports.addJobApplication = (req,res) => {
             error: firstError
         })
     } else {
-        const jobApplication = new JobApplication({
+        JobApplication.findOne({
             applicantId,
-            jobId,
-            bio,
-            skills
-          });
-  
-          jobApplication.save((err, jobApplication) => {
-            if (err) {
-              return res.status(401).json({
-                errors: "dumb error"
-              });
-            } else {
-              return res.json(jobApplication);
+            jobId
+        }).exec((err,user) => {
+            if (user || err) {
+                return res.status(400).json({
+                    error: "you have already applied to this job!"
+                })
             }
-          });
+            else{
+                const jobApplication = new JobApplication({
+                    applicantId,
+                    jobId,
+                    bio,
+                    skills
+                  });
+          
+                  jobApplication.save((err, jobApplication) => {
+                    if (err) {
+                      return res.status(401).json({
+                        errors: "dumb error"
+                      });
+                    } else {
+                      return res.json(jobApplication);
+                    }
+                  });
+            }
+        })
+        
         }
     }
 
