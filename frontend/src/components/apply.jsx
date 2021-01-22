@@ -9,7 +9,7 @@ import { useHistory, useLocation } from "react-router-dom";
 const ApplyJob = () => {
 
     const location = useLocation()
-
+    const history = useHistory()
     let [formData, setFormData] = useState({
         applicantId: '',
         jobId: '',
@@ -39,7 +39,7 @@ const ApplyJob = () => {
                         bio,
                         skills
                     })
-                    toast.success(res.data.message)
+                    toast.success("Applied Successfully")
                 }).catch(err=>{
                     toast.error(err.response.data.error)
                 })

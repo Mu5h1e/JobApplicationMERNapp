@@ -9,6 +9,8 @@ import { useHistory, useLocation } from "react-router-dom";
 
 
 const ExpandedDashboard = () => {
+    const history = useHistory();
+
 
     const location = useLocation()
 
@@ -45,7 +47,9 @@ const ExpandedDashboard = () => {
                 setCurrentEmail(res.data.email)
             })
         }
-
+        const handleSubmit = () => {
+            history.push('/add-application',{params:location.state.params})
+        }
       const loadData = () => {
         const data = {id: `${location.state.params}`}
         const headers = {
@@ -117,7 +121,7 @@ const ExpandedDashboard = () => {
                     </div>
                     <div class="col-span-12 sm:col-start-3 sm:col-end-13 px-3 sm:px-0">
 
-                    <div class="mt-2" hidden={currentRole===1 ? false : true}>
+                    <div class="mt-2" hidden={currentRole===1 ? false : true} onClick={() => handleSubmit()}>
                     <button class="inline-block rounded-full text-white 
                             bg-blue-400 hover:bg-blue-500 duration-300 
                             text-xs font-bold 
