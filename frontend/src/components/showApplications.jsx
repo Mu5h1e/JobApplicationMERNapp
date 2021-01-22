@@ -8,7 +8,7 @@ import {Redirect} from 'react-router-dom'
 import { useHistory, useLocation } from "react-router-dom";
 
 
-const ExpandedDashboard = () => {
+const showApplications = () => {
     const history = useHistory();
 
 
@@ -48,11 +48,8 @@ const ExpandedDashboard = () => {
                 setCurrentEmail(res.data.email)
             })
         }
-        const handleSubmitApply = () => {
+        const handleSubmit = () => {
             history.push('/add-application',{params:location.state.params})
-        }
-        const handleSubmitCheckApplications = () => {
-            history.push('/show-applications',{params:location.state.params})
         }
       const loadData = () => {
         const data = {id: `${location.state.params}`}
@@ -125,16 +122,16 @@ const ExpandedDashboard = () => {
                     </div>
                     <div class="col-span-12 sm:col-start-3 sm:col-end-13 px-3 sm:px-0">
 
-                    <div class="mt-2" hidden={currentRole===1 ? false : true} onClick={() => handleSubmitApply()}>
+                    <div class="mt-2" hidden={currentRole===1 ? false : true} onClick={() => handleSubmit()}>
                     <button class="inline-block rounded-full text-white 
                             bg-blue-400 hover:bg-blue-500 duration-300 
                             text-xs font-bold 
                             mr-1 md:mr-2 mb-2 px-2 md:px-4 py-1 
                             opacity-90 hover:opacity-100">
-                            applyadd-application
+                            apply
                         </button>
                     </div>
-                    <div class="mt-2" hidden={currentRole==0 && currentJobListing.email === currentEmail ? false : true} onClick={() => handleSubmitCheckApplications()}>
+                    <div class="mt-2" hidden={currentRole==0 && currentJobListing.email === currentEmail ? false : true}>
                     <button class="inline-block rounded-full text-white 
                             bg-blue-400 hover:bg-blue-500 duration-300 
                             text-xs font-bold 
@@ -153,4 +150,4 @@ const ExpandedDashboard = () => {
 }
 
 
-export default ExpandedDashboard
+export default showApplications
