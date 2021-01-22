@@ -114,3 +114,24 @@ exports.addJobApplication = (req,res) => {
         }
     }
 
+exports.showApplications = (req,res) => {
+    const {jobId}= req.body
+    const errors = validationResult(req)
+
+    if(!errors.isEmpty()) {
+        const firstError = errors.array().map(error => error.msg)[0]
+        return res.status(422).json({
+            error: firstError
+        })
+    } else {
+        JobApplication.find({jobId:jobId}).exec((err, records) => {
+            if (err) {
+                res.json({
+                    error: "dumb error"
+                })
+            }
+            res.json(records)
+        })
+    }
+}
+    

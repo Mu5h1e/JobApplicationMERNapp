@@ -39,6 +39,7 @@ const ExpandedDashboard = () => {
         }
         axios.post(url, data, headers)
             .then((res) => {
+                console.log(res.data.role)
                 if(res.data.role == 'employee') {
                     let role=1
                     setCurrentRole(1)

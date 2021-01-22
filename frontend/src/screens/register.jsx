@@ -96,8 +96,8 @@ const Register = () => {
                   value={role} 
                   onChange={handleChange('role')}>
                     <option id="0" value='placeholder' hidden='true'>Enter option</option>
-                    <option id="1" value='employee'>Employer</option>
-                    <option id="2" value='employer'>Employee</option>
+                    <option id="1" value='employee'>Employee</option>
+                    <option id="2" value='employer'>Employer</option>
                   </select>
                 
                   <button
