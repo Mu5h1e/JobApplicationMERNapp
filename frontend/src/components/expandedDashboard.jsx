@@ -52,7 +52,7 @@ const ExpandedDashboard = () => {
             history.push('/add-application',{params:location.state.params})
         }
         const handleSubmitCheckApplications = () => {
-            history.push('/show-applications',{params:location.state.params})
+            history.push('/show-applications',{params:location.state})
         }
       const loadData = () => {
         const data = {id: `${location.state.params}`}

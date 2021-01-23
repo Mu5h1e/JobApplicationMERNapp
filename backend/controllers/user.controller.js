@@ -128,7 +128,8 @@ exports.addJobApplication = (req,res) => {
     }
 
 exports.showApplications = (req,res) => {
-    const {jobId}= req.body
+    const jobId= req.body.params
+    console.log(jobId)
     const errors = validationResult(req)
 
     if(!errors.isEmpty()) {
@@ -137,12 +138,13 @@ exports.showApplications = (req,res) => {
             error: firstError
         })
     } else {
-        JobApplication.find({jobId:jobId}).exec((err, records) => {
+        JobApplication.find({jobId}).exec((err, records) => {
             if (err) {
                 res.json({
                     error: "dumb error"
                 })
             }
+            console.log(records)
             res.json(records)
         })
     }
