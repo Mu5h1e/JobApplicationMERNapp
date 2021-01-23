@@ -149,4 +149,38 @@ exports.showApplications = (req,res) => {
         })
     }
 }
-    
+exports.showAppliedUsers = (req,res) => {
+    const jobId= req.body.params
+    console.log(jobId)
+    const errors = validationResult(req)
+    const findAllUsers = (records) => {
+        const usersList =  records.map((record) => record.applicantId)
+        console.log(usersList)
+        User.find({
+            _id: { $in: usersList}
+        }).exec((err, records) => {
+            if (err) {
+                res.json({
+                    error: "dumb error"
+                })
+            }
+            res.json(records)
+        })
+    }
+    if(!errors.isEmpty()) {
+        const firstError = errors.array().map(error => error.msg)[0]
+        return res.status(422).json({
+            error: firstError
+        })
+    } else {
+        JobApplication.find({jobId}).exec((err, records) => {
+            if (err) {
+                res.json({
+                    error: "dumb error"
+                })
+            }
+            findAllUsers(records)
+        })
+
+    }
+}

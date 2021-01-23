@@ -10,20 +10,14 @@ import { useHistory , useLocation} from "react-router-dom";
 const ApplicationListings = () => {
 
     let [activeJobListing, setactiveJobListing] = React.useState([])
-    let [activeUser, setActiveUser] = React.useState({
-        name: '',
-        email: '',
-        role: '',
-        skills: [],
-        rating: null
-    })
+    let [activeUser, setActiveUser] = React.useState([])
 
     const location = useLocation()
     const jobId = location.state.params
     console.log(location.state.params)
     useEffect(() => {
         loadData();
-        // loadUserData()
+        loadUserData()
       }, []);
 
     const loadData = () => {
@@ -35,19 +29,13 @@ const ApplicationListings = () => {
             })
     } 
 
-    const loadUserData = (applicantId) => {
-        const data = {_id: applicantId}
-        console.log(applicantId)
-        const url = "http://localhost:5000/api/user"
+    const loadUserData = () => {
+        const data = jobId
+        const url = "http://localhost:5000/api/show-applied-users"
         axios.post(url, data)
         .then(res => {
-            const { name, email, role, skills, rating} = res.data
-            setActiveUser({...activeUser, name, email, role, skills, rating})
+            setActiveUser(res.data)
         })
-    }
-
-    const load = (applicantId) => {
-        loadUserData(applicantId)
     }
     return (
         <div className="container mx-auto px-4 sm:px-8">
@@ -93,7 +81,6 @@ const ApplicationListings = () => {
                             </tr>
                         </thead>
                         {activeJobListing.map((listing, index) => {
-                            load(listing.applicantId)
                             return(<tbody>
                             <tr>
                                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">

@@ -7,7 +7,8 @@ const {
     addJobListing,
     expandedDashboardController,
     addJobApplication,
-    showApplications
+    showApplications,
+    showAppliedUsers
 } = require('../controllers/user.controller')
 
 router.post('/user/',profileDisplayController)
@@ -16,6 +17,7 @@ router.post('/addJobListings', addJobListing)
 router.post('/expanded-dashboard', expandedDashboardController)
 router.post('/add-application', addJobApplication)
 router.post('/show-applications', showApplications)
+router.post('/show-applied-users', showAppliedUsers)
 
 
 module.exports = router
