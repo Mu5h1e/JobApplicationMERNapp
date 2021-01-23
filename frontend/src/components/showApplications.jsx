@@ -89,7 +89,7 @@ const ApplicationListings = () => {
                                         </div>
                                         <div className="ml-3">
                                             <p className="text-gray-900 whitespace-no-wrap">
-                                                {activeUser.name}
+                                                {activeUser[index].name}
                                             </p>
                                         </div>
                                     </div>
