@@ -17,7 +17,7 @@ const ApplicationListings = () => {
     console.log(location.state.params)
     useEffect(() => {
         loadData();
-        loadUserData()
+        setActiveUser()
       }, []);
 
     const loadData = () => {
@@ -27,6 +27,8 @@ const ApplicationListings = () => {
         .then(res => {
             setactiveJobListing(res.data)
             })
+            loadUserData()
+
     } 
 
     const loadUserData = () => {
@@ -35,6 +37,7 @@ const ApplicationListings = () => {
         axios.post(url, data)
         .then(res => {
             setActiveUser(res.data)
+            console.log(activeUser)
         })
     }
     return (
@@ -81,6 +84,7 @@ const ApplicationListings = () => {
                             </tr>
                         </thead>
                         {activeJobListing.map((listing, index) => {
+                            // load(listing.applicantId)
                             return(<tbody>
                             <tr>
                                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -89,7 +93,7 @@ const ApplicationListings = () => {
                                         </div>
                                         <div className="ml-3">
                                             <p className="text-gray-900 whitespace-no-wrap">
-                                                {activeUser[index].name}
+                                            {(activeUser && activeUser.length > 0)} ? {activeUser[index].name}
                                             </p>
                                         </div>
                                     </div>
