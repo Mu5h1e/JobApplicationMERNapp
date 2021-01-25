@@ -27,7 +27,7 @@ const ApplicationListings = () => {
         .then(res => {
             setactiveJobListing(res.data)
             })
-
+            loadUserData()
     } 
     const loadUserData = () => {
         const data = jobId
@@ -95,7 +95,7 @@ const ApplicationListings = () => {
                                         </div>
                                         <div className="ml-3">
                                             <p className="text-gray-900 whitespace-no-wrap">
-                                            {activeUser[index].name}
+                                            {activeUser[index] && activeUser[index].name ? activeUser[index].name : "not yet loaded"}
                                             </p>
                                         </div>
                                     </div>
