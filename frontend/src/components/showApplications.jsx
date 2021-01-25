@@ -16,8 +16,8 @@ const ApplicationListings = () => {
     const jobId = location.state.params
     console.log(location.state.params)
     useEffect(() => {
+        loadUserData()
         loadData();
-        setActiveUser()
       }, []);
 
     const loadData = () => {
@@ -27,19 +27,21 @@ const ApplicationListings = () => {
         .then(res => {
             setactiveJobListing(res.data)
             })
-            loadUserData()
 
     } 
-
     const loadUserData = () => {
         const data = jobId
         const url = "http://localhost:5000/api/show-applied-users"
         axios.post(url, data)
-        .then(res => {
-            setActiveUser(res.data)
-            console.log(activeUser)
+        .then((res) => {
+            var obj = res.data
+            var ud = []
+            for(var i in obj)
+                ud.push(obj[i])
+            setActiveUser(ud)
         })
     }
+    console.log(typeof Object.values(activeUser))
     return (
         <div className="container mx-auto px-4 sm:px-8">
         <div className="py-8">
@@ -93,7 +95,7 @@ const ApplicationListings = () => {
                                         </div>
                                         <div className="ml-3">
                                             <p className="text-gray-900 whitespace-no-wrap">
-                                            {(activeUser && activeUser.length > 0)} ? {activeUser[index].name}
+                                            {activeUser[index].name}
                                             </p>
                                         </div>
                                     </div>

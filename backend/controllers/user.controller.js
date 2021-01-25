@@ -144,7 +144,7 @@ exports.showApplications = (req,res) => {
                     error: "dumb error"
                 })
             }
-            console.log(records)
+            console.log(typeof records)
             res.json(records)
         })
     }
